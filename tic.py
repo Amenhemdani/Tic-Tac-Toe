@@ -2,15 +2,23 @@
 
 class TicTacToe():
 
-
     def __init__(self):
         self.board=[[" " for _ in range(3)] for _ in range(3)]
         self.i=0
+        self.lst=[item for l in self.board for item in l if item==" "]
 
-    def current_player(self,i):
-        self.i=i
+    def choice(self):
+        row=input("Enter the index of row")
+        while row not in ["0","1","2"]:
+            row=input("Enter the index of row")
+        col=input("Enter the index of column")
+        while col not in ["0","1","2"]:
+            col=input("Enter the index of column")
+        self.make_move(int(row), int(col))
+        
+    def current_player(self):
         ind=["x","o"]
-        return ind[i]
+        return ind[self.i]
 
     def check_row_col(self,board):
         occur={
@@ -31,44 +39,37 @@ class TicTacToe():
                 return 0
             elif o==3:
                 return 1
-        return False
+        return -1
             
-
     def print_board(self):
-        board=self.board
         for i in range(3):
             for j in range(3):
-                print(board[i][j] , end=' ')
+                print(self.board[i][j] , end=' ')
             print()
 
     def switch_player(self):
-        board=self.board
-        lst=[i for l in board for i in l if i==" "]
+        lst=[item for l in self.board for item in l if item==" "]
         print(len(lst))
         if len(lst)%2==0:
-            i=1
+            self.i=1
         else:
-            i=0
-        x=self.current_player(i)
+            self.i=0
+        x=self.current_player()
         return x
         
-
     def make_move(self,row, col):
-        board=self.board
-        if board[row][col]==" ":
-            x=current_player(self.i)
-            board[row][col]==x
-            lst=[i for l in board for i in l if i==" "]
+        if self.board[row][col]==" ":
+            x=self.switch_player()
+            self.board[row][col]=x
+            lst=[item for l in self.board for item in l if item==" "]
             if len(lst)<=4:
-                self.check_winner(board)
+                self.check_winner(self.board)                
             elif len(lst)==0:
-                self.check_draw() if self.check_winner(board)==False else self.check_winner(board) 
+                self.check_draw() if self.check_winner(self.board)==False else self.check_winner(self.board) 
 
         else:
             print("This is already occupied , Try again")
             self.choice()
-
-
 
     def check_winner(self,board):
         players=["Player 1","Player 2"] 
@@ -77,18 +78,19 @@ class TicTacToe():
             print(f"The {players[win]} is winning") 
         else:
             return False
-
-        
-
+   
     def check_draw(self):
         print("\nDraw")
 
     def play(self):
-        board=self.board
-
+        lst=[item for l in self.board for item in l if item==" "]
+        self.print_board()
+        while len(lst)!=0 and self.check_winner(self.board) is False:
+            self.choice()
+            self.print_board()
+            self.switch_player()
+        print("Game over")
 
 game=TicTacToe()
-game.print_board()
-
 
 game.play()
