@@ -49,7 +49,6 @@ class TicTacToe():
 
     def switch_player(self):
         lst=[item for l in self.board for item in l if item==" "]
-        print(len(lst))
         if len(lst)%2==0:
             self.i=1
         else:
