@@ -1,5 +1,3 @@
-
-
 class TicTacToe():
 
     def __init__(self):
@@ -21,7 +19,6 @@ class TicTacToe():
                 return 1
             count_x=0
             count_o=0
-
         return -1
 
     def check_column(self,board):
@@ -39,7 +36,6 @@ class TicTacToe():
                 return 1
             count_x=0
             count_o=0
-
         return -1
 
     def check_diagonal_1(self,board):
@@ -80,8 +76,7 @@ class TicTacToe():
             index=self.check_diagonal_1(board)        
         elif self.check_diagonal_2(board) in [0,1]:
             index=self.check_diagonal_2(board)
-        return index
-            
+        return index     
 
     def print_board(self):
         print(" -------------")
